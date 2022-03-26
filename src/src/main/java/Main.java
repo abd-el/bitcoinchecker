@@ -1,5 +1,6 @@
 public class Main {
     public static void main(String[] args){
-        System.out.println("test");
+        long time = System.currentTimeMillis();
+        System.out.println(time);
     }
 }
