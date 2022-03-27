@@ -6,9 +6,9 @@ public class BitcoinTransactie {
     private ArrayList<Double> ontvangenBedragen;
     private ArrayList<BitcoinAdres> afzenders;
     private ArrayList<Double> verzondenBedragen;
-    private Time tijd;
+    private long tijd;
 
-    public BitcoinTransactie(ArrayList<BitcoinAdres> ontvangers, ArrayList<Double> ontvangenBedragen, ArrayList<BitcoinAdres> afzenders, ArrayList<Double> verzondenBedragen, Time tijd) {
+    public BitcoinTransactie(ArrayList<BitcoinAdres> ontvangers, ArrayList<Double> ontvangenBedragen, ArrayList<BitcoinAdres> afzenders, ArrayList<Double> verzondenBedragen, long tijd) {
         this.ontvangers = ontvangers;
         this.ontvangenBedragen = ontvangenBedragen;
         this.afzenders = afzenders;
@@ -32,7 +32,7 @@ public class BitcoinTransactie {
         return verzondenBedragen;
     }
 
-    public Time getTijd() {
+    public long getTijd() {
         return tijd;
     }
 }
