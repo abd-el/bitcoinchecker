@@ -18,4 +18,8 @@ public class Tracker {
     public static void verwijderAdres(TrackedBitcoinAdres bitcoinAdres){
 
     }
+
+    public static Double getBitcoinPrijs(){
+        return null;
+    }
 }
