@@ -8,6 +8,16 @@ public class TrackedBitcoinAdres extends BitcoinAdres {
         this.laatstGecontroleerd = laatstGecontroleerd;
     }
 
+    public TrackedBitcoinAdres(String naam, String adres, Double saldo, long laatstGecontroleerd) {
+        super(naam, adres, saldo);
+        this.laatstGecontroleerd = laatstGecontroleerd;
+    }
+
+    public TrackedBitcoinAdres(String naam, String adres, long laatstGecontroleerd) {
+        super(naam, adres);
+        this.laatstGecontroleerd = laatstGecontroleerd;
+    }
+
     public long getLaatstGecontroleerd() {
         return laatstGecontroleerd;
     }

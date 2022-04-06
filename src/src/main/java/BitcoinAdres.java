@@ -13,12 +13,27 @@ public abstract class BitcoinAdres {
         this.geschiedenis = geschiedenis;
     }
 
+    public BitcoinAdres(String naam, String adres, Double saldo) {
+        this.naam = naam;
+        this.adres = adres;
+        this.saldo = saldo;
+    }
+
+    public BitcoinAdres(String naam, String adres) {
+        this.naam = naam;
+        this.adres = adres;
+    }
+
     public void setNaam(String naam) {
         this.naam = naam;
     }
 
     public void setAdres(String adres) {
         this.adres = adres;
+    }
+
+    public void setSaldo(Double saldo) {
+        this.saldo = saldo;
     }
 
     public void setGeschiedenis(ArrayList<BitcoinTransactie> geschiedenis) {
