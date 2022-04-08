@@ -2,8 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/.idea/bitcoinchecker.iml" filepath="$PROJECT_DIR$/.idea/bitcoinchecker.iml" />
-      <module fileurl="file://$PROJECT_DIR$/src/src.iml" filepath="$PROJECT_DIR$/src/src.iml" />
+      <module fileurl="file://$PROJECT_DIR$/bitcoinchecker.iml" filepath="$PROJECT_DIR$/bitcoinchecker.iml" />
     </modules>
   </component>
 </project>
