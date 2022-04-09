@@ -37,7 +37,7 @@ public class BitcoinChecker extends Application {
     public void start(Stage stage) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(BitcoinChecker.class.getResource("fxml/bitcoinChecker.fxml"));
         Scene scene = new Scene(fxmlLoader.load(), 320, 240);
-        stage.setTitle("Hello!");
+        stage.setTitle("Bitcoin Checker!");
         stage.setScene(scene);
         stage.show();
     }
