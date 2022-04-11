@@ -12,6 +12,8 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class BitcoinChecker extends Application {
+    public static TrayIcon trayIcon;
+
     private static void toonMenu(){
         System.out.println("== Menu ==");
         System.out.println("1) Toon alle adressen");
@@ -19,8 +21,6 @@ public class BitcoinChecker extends Application {
         System.out.println("3) Voeg adres toe");
         System.out.println("0) Exit");
     }
-
-    public static TrayIcon trayIcon;
 
     private static void initialiseer() throws AWTException {
         Tracker.initialiseer();
@@ -42,9 +42,13 @@ public class BitcoinChecker extends Application {
         stage.show();
     }
 
-    public static void main(String[] args) throws AWTException {
+    public static void main(String[] args) {
         // launch();
-        initialiseer();
+        try {
+            initialiseer();
+        } catch (AWTException e) {
+            e.printStackTrace();
+        }
 
         // MENU
         toonMenu();

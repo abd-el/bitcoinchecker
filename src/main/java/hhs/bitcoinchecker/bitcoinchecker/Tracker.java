@@ -12,10 +12,27 @@ import java.util.TimerTask;
 public class Tracker {
     @NotNull
     private static ArrayList<TrackedBitcoinAdres> adressen = new ArrayList<TrackedBitcoinAdres>();
+    public static final Timer timer = new Timer();
+    public static final TimerTask timerTask = new TimerTask() {
+        @Override
+        public void run() {
+            try {
+                controleerAlleAdressen();
+            } catch (IOException | ParseException e) {
+                e.printStackTrace();
+            }
+        }
+    };
+
+    public static void initialiseer(){
+        ArrayList<TrackedBitcoinAdres> adressen = JsonHandler.haalTrackedBitcoinAdressenOp();
+        setAdressen(adressen);
+
+        timer.scheduleAtFixedRate(timerTask, 0, 5 * 60 * 1000);
+    }
 
     private static void controleerAlleAdressen() throws IOException, ParseException {
-        for(int i = 0; i < adressen.size(); i++){
-            TrackedBitcoinAdres adres = adressen.get(i);
+        for (TrackedBitcoinAdres adres : adressen) {
             controleerAdres(adres);
         }
     }
@@ -36,25 +53,6 @@ public class Tracker {
         }
         bitcoinAdres.setLaatstGecontroleerd(tijd);
         JsonHandler.slaTrackedBitcoinAdressenOp();
-    }
-
-    public static final Timer timer = new Timer();
-    public static final TimerTask timerTask = new TimerTask() {
-        @Override
-        public void run() {
-            try {
-                controleerAlleAdressen();
-            } catch (IOException | ParseException e) {
-                e.printStackTrace();
-            }
-        }
-    };
-
-    public static void initialiseer(){
-        ArrayList<TrackedBitcoinAdres> adressen = JsonHandler.haalTrackedBitcoinAdressenOp();
-        setAdressen(adressen);
-
-        timer.scheduleAtFixedRate(timerTask, 0, 5 * 60 * 1000);
     }
 
     private static void stuurMelding(BitcoinTransactie bitcoinTransactie, Double prijs){
