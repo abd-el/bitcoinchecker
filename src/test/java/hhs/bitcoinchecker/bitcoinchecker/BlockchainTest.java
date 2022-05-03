@@ -10,6 +10,33 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class BlockchainTest {
     @Test
+    public void TestVoegAdresToe_ConditionCoverage() {
+        // Tracker.voegAdresToe(...)
+    }
+
+    @Test
+    public void TestVoegAdresToe_DecisionCoverage() {
+        // Tracker.voegAdresToe(...)
+    }
+
+    @Test
+    public void TestVoegAdresToe_ConditionDecisionCoverage() {
+        // Tracker.voegAdresToe(...)
+    }
+
+    @Test
+    public void TestVoegAdresToe_ModifiedConditionDecisionCoverage() {
+        // Tracker.voegAdresToe(...)
+    }
+
+    @Test
+    public void TestVoegAdresToe_MultipleConditionsCoverage() {
+        // Tracker.voegAdresToe(...)
+    }
+
+    // Test_EquivalantieKlassen()
+
+    @Test
     public void Test() throws IOException, ParseException {
         // Arrange
         Tracker.initialiseer();

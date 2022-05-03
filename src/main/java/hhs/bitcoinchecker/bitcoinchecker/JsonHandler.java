@@ -8,6 +8,7 @@ import java.io.*;
 import java.lang.reflect.Type;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.Objects;
 
 public class JsonHandler {
     static Gson gson = new GsonBuilder().setPrettyPrinting().create();
@@ -17,8 +18,7 @@ public class JsonHandler {
         ArrayList<TrackedBitcoinAdres> adressen = Tracker.getAdressen();
 
         // Zoek de file
-        String file = (new File("").getAbsolutePath() + "/src/main/resources/hhs/bitcoinchecker/bitcoinchecker/storage/trackedBitcoinAdres.json");
-        System.out.println(file);
+        String file = Objects.requireNonNull(BitcoinChecker.class.getResource("storage/trackedBitcoinAdres.json")).getFile();
 
         // Schrijf naar de file met een FileWriter object via gson
         FileWriter writer = null;

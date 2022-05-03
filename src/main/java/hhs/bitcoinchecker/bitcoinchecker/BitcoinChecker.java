@@ -23,14 +23,23 @@ public class BitcoinChecker extends Application {
         System.out.println("0) Exit");
     }
 
-    private static void initialiseer() throws AWTException {
+    private static void initialiseer() {
         Tracker.initialiseer();
 
+        // Maak systeem balk object aan
         SystemTray systemTray = SystemTray.getSystemTray();
-        java.awt.Image JWTimage = Toolkit.getDefaultToolkit().getImage(String.valueOf(BitcoinChecker.class.getResource("images/btc-icon.png")));
+
+        // Zoek icoon
+        java.awt.Image JWTimage = Toolkit.getDefaultToolkit().getImage(BitcoinChecker.class.getResource("images/btc-icon.png"));
         trayIcon = new TrayIcon(JWTimage, "Bitcoin Checker");
         trayIcon.setImageAutoSize(true);
-        systemTray.add(trayIcon);
+
+        // Voeg ook toe aan systeem balk
+        try {
+            systemTray.add(trayIcon);
+        } catch (AWTException e) {
+            e.printStackTrace();
+        }
     }
 
     @Override
@@ -47,12 +56,8 @@ public class BitcoinChecker extends Application {
     }
 
     public static void main(String[] args) {
+        initialiseer();
         launch();
-        try {
-            initialiseer();
-        } catch (AWTException e) {
-            e.printStackTrace();
-        }
 
         // MENU
         toonMenu();
@@ -154,6 +159,6 @@ public class BitcoinChecker extends Application {
             }
         }
 
-        System.exit(0);
+        // System.exit(0);
     }
 }
