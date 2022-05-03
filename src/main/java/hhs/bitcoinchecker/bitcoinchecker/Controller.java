@@ -3,6 +3,8 @@ package hhs.bitcoinchecker.bitcoinchecker;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
 
 public class Controller {
     @FXML
@@ -12,10 +14,19 @@ public class Controller {
     private Label welcomeText;
 
     @FXML
-    protected void onHelloButtonClick() {
-        welcomeText.setText("Bitcoin Checker!");
-    }
+    private TableView adresTabel;
 
     @FXML
-    protected void button_clicked() { welcomeText.setText("voorbeeld tekst"); }
+    private TableColumn adresNaamKolom;
+
+    @FXML
+    private TableColumn adresHashKolom;
+
+    @FXML
+    private TableColumn verwijderAdresKolom;
+
+    @FXML
+    protected void voegAdresToeGeklikt() {
+        
+    }
 }

@@ -1,17 +1,29 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.geometry.Insets?>
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.layout.VBox?>
-
 <?import javafx.scene.control.Button?>
-<VBox alignment="CENTER" spacing="20.0" xmlns:fx="http://javafx.com/fxml"
-      fx:controller="hhs.bitcoinchecker.bitcoinchecker.Controller">
-    <padding>
-        <Insets bottom="20.0" left="20.0" right="20.0" top="20.0"/>
-    </padding>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Text?>
 
-    <Button text="klik hier" fx:id="button" onAction="#button_clicked"/>
-    <Label fx:id="welcomeText"/>
-    <Button text="Hello!" onAction="#onHelloButtonClick"/>
+<VBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="368.0" prefWidth="551.0" spacing="20.0" xmlns="http://javafx.com/javafx/17.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="hhs.bitcoinchecker.bitcoinchecker.Controller">
+    <padding>
+        <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+    </padding>
+   <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Adressen" />
+   <TableView fx:id="adresTabel" prefHeight="200.0" prefWidth="200.0">
+     <columns>
+       <TableColumn fx:id="adresNaamKolom" prefWidth="132.79998397827148" text="Naam" />
+       <TableColumn prefWidth="255.2000274658203" text="Adres" />
+         <TableColumn fx:id="verwijderAdresKolom" prefWidth="122.39996337890625" text="Verwijder" />
+     </columns>
+   </TableView>
+   <Pane prefHeight="45.0" prefWidth="478.0">
+      <children>
+      
+                <Button fx:id="voegAdresToe" layoutX="176.0" layoutY="10.0" onAction="#voegAdresToeGeklikt" prefHeight="26.0" prefWidth="159.0" text="Voeg adres toe" />
+      </children>
+   </Pane>
 </VBox>
