@@ -3,11 +3,12 @@ package hhs.bitcoinchecker.bitcoinchecker;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
 import javafx.stage.Stage;
 
 import java.awt.*;
-import java.io.File;
 import java.io.IOException;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -24,26 +25,29 @@ public class BitcoinChecker extends Application {
 
     private static void initialiseer() throws AWTException {
         Tracker.initialiseer();
+
         SystemTray systemTray = SystemTray.getSystemTray();
-        String imagePath = (new File("").getAbsolutePath() + "/src/main/resources/images/icon.png");
-        Image image = Toolkit.getDefaultToolkit().getImage(imagePath);
-        System.out.println(imagePath);
-        trayIcon = new TrayIcon(image, "Bitcoin Checker");
+        java.awt.Image JWTimage = Toolkit.getDefaultToolkit().getImage(String.valueOf(BitcoinChecker.class.getResource("images/btc-icon.png")));
+        trayIcon = new TrayIcon(JWTimage, "Bitcoin Checker");
         trayIcon.setImageAutoSize(true);
         systemTray.add(trayIcon);
     }
 
     @Override
     public void start(Stage stage) throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(BitcoinChecker.class.getResource("fxml/bitcoinChecker.fxml"));
-        Scene scene = new Scene(fxmlLoader.load(), 320, 240);
+        FXMLLoader fxmlLoader = new FXMLLoader(BitcoinChecker.class.getResource("fxml/view.fxml"));
+        Scene scene = new Scene(fxmlLoader.load());
+
+        Image JavaFXimage = new Image(String.valueOf(BitcoinChecker.class.getResource("images/btc-icon.png")));
+        stage.getIcons().add(JavaFXimage);
+
         stage.setTitle("Bitcoin Checker!");
         stage.setScene(scene);
         stage.show();
     }
 
     public static void main(String[] args) {
-        // launch();
+        launch();
         try {
             initialiseer();
         } catch (AWTException e) {
@@ -56,7 +60,7 @@ public class BitcoinChecker extends Application {
         Scanner scannerInt = new Scanner(System.in);
         Scanner scannerLine = new Scanner(System.in);
 
-        int gekozen = scannerInt.nextInt();
+        int gekozen = 0; // scannerInt.nextInt();
         while (gekozen != 0) {
             if (gekozen == 1) {
                 ArrayList<TrackedBitcoinAdres> trackedAdressen = Tracker.getAdressen();
