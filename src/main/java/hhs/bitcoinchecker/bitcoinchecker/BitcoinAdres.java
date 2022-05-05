@@ -1,5 +1,7 @@
 package hhs.bitcoinchecker.bitcoinchecker;
 
+import java.io.IOException;
+import java.text.ParseException;
 import java.util.ArrayList;
 
 public abstract class BitcoinAdres {
@@ -15,15 +17,17 @@ public abstract class BitcoinAdres {
         this.geschiedenis = geschiedenis;
     }
 
-    public BitcoinAdres(String naam, String adres, Double saldo) {
+    public BitcoinAdres(String naam, String adres, Double saldo) throws IOException, ParseException {
         this.naam = naam;
         this.adres = adres;
         this.saldo = saldo;
+        this.geschiedenis = Blockchain.getAdresGeschiedenis(this);
     }
 
-    public BitcoinAdres(String naam, String adres) {
+    public BitcoinAdres(String naam, String adres) throws IOException, ParseException {
         this.naam = naam;
         this.adres = adres;
+        this.geschiedenis = Blockchain.getAdresGeschiedenis(this);
     }
 
     public void setNaam(String naam) {

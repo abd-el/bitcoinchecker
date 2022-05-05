@@ -1,5 +1,7 @@
 package hhs.bitcoinchecker.bitcoinchecker;
 
+import java.io.IOException;
+import java.text.ParseException;
 import java.util.ArrayList;
 
 public class TrackedBitcoinAdres extends BitcoinAdres {
@@ -10,14 +12,19 @@ public class TrackedBitcoinAdres extends BitcoinAdres {
         this.laatstGecontroleerd = laatstGecontroleerd;
     }
 
-    public TrackedBitcoinAdres(String naam, String adres, Double saldo, long laatstGecontroleerd) {
+    public TrackedBitcoinAdres(String naam, String adres, Double saldo, long laatstGecontroleerd) throws IOException, ParseException {
         super(naam, adres, saldo);
         this.laatstGecontroleerd = laatstGecontroleerd;
     }
 
-    public TrackedBitcoinAdres(String naam, String adres, long laatstGecontroleerd) {
+    public TrackedBitcoinAdres(String naam, String adres, long laatstGecontroleerd) throws IOException, ParseException {
         super(naam, adres);
         this.laatstGecontroleerd = laatstGecontroleerd;
+    }
+
+    public TrackedBitcoinAdres(String naam, String adres) throws IOException, ParseException {
+        super(naam, adres);
+        this.laatstGecontroleerd = 0;
     }
 
     public long getLaatstGecontroleerd() {

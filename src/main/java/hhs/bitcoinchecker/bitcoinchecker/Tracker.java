@@ -24,7 +24,7 @@ public class Tracker {
         }
     };
 
-    public static void initialiseer(){
+    public static void initialiseer() throws IOException, ParseException {
         ArrayList<TrackedBitcoinAdres> adressen = JsonHandler.haalTrackedBitcoinAdressenOp();
         setAdressen(adressen);
 
@@ -55,22 +55,43 @@ public class Tracker {
         JsonHandler.slaTrackedBitcoinAdressenOp();
     }
 
-    private static void stuurMelding(BitcoinTransactie bitcoinTransactie, Double prijs){
-        double totaal = bitcoinTransactie.getVerandering() * prijs;
-        totaal = Math.round(totaal * 100.0) / 100.0;
-        String caption;
-        String text;
+    public static boolean stuurMelding(BitcoinTransactie bitcoinTransactie, Double prijs){
+        double verandering = bitcoinTransactie.getVerandering() * prijs;
+        verandering = Math.round(verandering * 100.0) / 100.0;
+        String caption = null;
+        String text = null;
         String adresNaam = bitcoinTransactie.getBitcoinAdres().getNaam();
         String adresHash = bitcoinTransactie.getBitcoinAdres().getAdres();
+        long laatstGecontroleerd = 0;
 
-        if( totaal > 0 ){
-            caption = "Bitcoin gestort!";
-            text = "Jouw adres (" + adresNaam + ": " + adresHash + ")" + " heeft € " + totaal + " aan bitcoin ontvangen!";
-        } else {
-            caption = "Bitcoin afgeschreven!";
-            text = "Er is € " + totaal + " van je adres (" + adresNaam + ": " + adresHash + ")" + " aan bitcoin afgeschreven !";
+        boolean adresWordtGevolgd = false;
+        for (TrackedBitcoinAdres adres : adressen) {
+            String naam = adres.getNaam();
+            if (adresNaam.equals(naam)) {
+                laatstGecontroleerd = adres.getLaatstGecontroleerd();
+                adresWordtGevolgd = true;
+                break;
+            }
         }
-        BitcoinChecker.trayIcon.displayMessage(caption, text, TrayIcon.MessageType.NONE);
+
+        boolean transactieIsNieuw = bitcoinTransactie.getTijd() > laatstGecontroleerd;
+        boolean gestuurd = false;
+
+        if(adresWordtGevolgd && transactieIsNieuw){
+            if(verandering > 0){
+                caption = "Bitcoin gestort!";
+                text = "Jouw adres (" + adresNaam + ": " + adresHash + ")" + " heeft € " + verandering + " aan bitcoin ontvangen!";
+                BitcoinChecker.trayIcon.displayMessage(caption, text, TrayIcon.MessageType.NONE);
+                gestuurd = true;
+            } else if(verandering < 0) {
+                caption = "Bitcoin afgeschreven!";
+                text = "Er is € " + verandering + " van je adres (" + adresNaam + ": " + adresHash + ")" + " aan bitcoin afgeschreven !";
+                BitcoinChecker.trayIcon.displayMessage(caption, text, TrayIcon.MessageType.NONE);
+                gestuurd = true;
+            }
+        }
+
+        return gestuurd;
     }
 
     public static void voegAdresToe(TrackedBitcoinAdres bitcoinAdres){

@@ -1,0 +1,184 @@
+[
+  {
+    "laatstGecontroleerd": 0,
+    "naam": "NrEen",
+    "adres": "bc1qzxq78ncvglf6n2fugkq2ru8x4w53mw6h7zsakx",
+    "geschiedenis": [
+      {
+        "hash": "586cdf7214282ca0867afeee0b4086542d0d1cb44482ac51dff212a13b74d6eb",
+        "tijd": 1651756607000,
+        "verandering": 0.00579805,
+        "bitcoinAdresNaam": "NrEen",
+        "bitcoinAdresHash": "bc1qzxq78ncvglf6n2fugkq2ru8x4w53mw6h7zsakx"
+      },
+      {
+        "hash": "28252e12de567b2a31fbaba5cda541c01dc6fb111ecb54398c3625a029886ff0",
+        "tijd": 1650396490000,
+        "verandering": 0.00542907,
+        "bitcoinAdresNaam": "NrEen",
+        "bitcoinAdresHash": "bc1qzxq78ncvglf6n2fugkq2ru8x4w53mw6h7zsakx"
+      },
+      {
+        "hash": "5788d8ff3314142be1c23fa4cc35821c83bc6bc9ac4c6b06ce83490e654b6f6f",
+        "tijd": 1649932403000,
+        "verandering": 0.00510523,
+        "bitcoinAdresNaam": "NrEen",
+        "bitcoinAdresHash": "bc1qzxq78ncvglf6n2fugkq2ru8x4w53mw6h7zsakx"
+      },
+      {
+        "hash": "744f13896d275419a55d9b261b2dedd27cb801d88c26ef9a946b410b2ed96e87",
+        "tijd": 1649300980000,
+        "verandering": 0.0047736,
+        "bitcoinAdresNaam": "NrEen",
+        "bitcoinAdresHash": "bc1qzxq78ncvglf6n2fugkq2ru8x4w53mw6h7zsakx"
+      },
+      {
+        "hash": "9bd7f40ffac27b675c07c5a7391b65b53f3a83591072ab82bfa0aa611837050c",
+        "tijd": 1648702157000,
+        "verandering": 0.00424767,
+        "bitcoinAdresNaam": "NrEen",
+        "bitcoinAdresHash": "bc1qzxq78ncvglf6n2fugkq2ru8x4w53mw6h7zsakx"
+      },
+      {
+        "hash": "776cb726fab445ff09a593a895b72068a9c51a7cbf96242cbf3a56b7c5b28f81",
+        "tijd": 1648121930000,
+        "verandering": 0.00466931,
+        "bitcoinAdresNaam": "NrEen",
+        "bitcoinAdresHash": "bc1qzxq78ncvglf6n2fugkq2ru8x4w53mw6h7zsakx"
+      },
+      {
+        "hash": "fd77bf515c9013f6778ec5673b74f7be6a6e208bbf68209c8ca4a93331e2a7c9",
+        "tijd": 1647908668000,
+        "verandering": 0.00676866,
+        "bitcoinAdresNaam": "NrEen",
+        "bitcoinAdresHash": "bc1qzxq78ncvglf6n2fugkq2ru8x4w53mw6h7zsakx"
+      },
+      {
+        "hash": "1d6318ad57ce408c4439325cce99f630ac8ed5b0f5690a7e9dc33cf2873131f1",
+        "tijd": 1647904893000,
+        "verandering": 0.01117917,
+        "bitcoinAdresNaam": "NrEen",
+        "bitcoinAdresHash": "bc1qzxq78ncvglf6n2fugkq2ru8x4w53mw6h7zsakx"
+      },
+      {
+        "hash": "00949a31a6d2a1415f7c3ddb739e9c0bcdcfcd66cab2ab0697b47d7b68ca08e8",
+        "tijd": 1647900896000,
+        "verandering": 0.0101351,
+        "bitcoinAdresNaam": "NrEen",
+        "bitcoinAdresHash": "bc1qzxq78ncvglf6n2fugkq2ru8x4w53mw6h7zsakx"
+      },
+      {
+        "hash": "677d1268cfe54d796c3cc6e8d2219a01231323bdacd566e1acff80a8bb5e2e25",
+        "tijd": 1647639758000,
+        "verandering": 0.00486524,
+        "bitcoinAdresNaam": "NrEen",
+        "bitcoinAdresHash": "bc1qzxq78ncvglf6n2fugkq2ru8x4w53mw6h7zsakx"
+      },
+      {
+        "hash": "2567f5a5d7d1a4ffa43b93d706fa58f8ed564cd44ea78e4a2649dda30e5b4615",
+        "tijd": 1646696426000,
+        "verandering": 0.0061122,
+        "bitcoinAdresNaam": "NrEen",
+        "bitcoinAdresHash": "bc1qzxq78ncvglf6n2fugkq2ru8x4w53mw6h7zsakx"
+      },
+      {
+        "hash": "e3325b8e8b8f493cbe57759ac47966d2a6564a8ffe4559c1185ef011f73e3cfd",
+        "tijd": 1646454908000,
+        "verandering": 0.00598985,
+        "bitcoinAdresNaam": "NrEen",
+        "bitcoinAdresHash": "bc1qzxq78ncvglf6n2fugkq2ru8x4w53mw6h7zsakx"
+      },
+      {
+        "hash": "e2ac235af9c8f8ccfc3f29e3c961f7fd39befc071e0badefd55abe705bc0d4fb",
+        "tijd": 1646242649000,
+        "verandering": 0.00456927,
+        "bitcoinAdresNaam": "NrEen",
+        "bitcoinAdresHash": "bc1qzxq78ncvglf6n2fugkq2ru8x4w53mw6h7zsakx"
+      },
+      {
+        "hash": "45e6751bed15f49a4e6cd61779777810fa3ffc03d92ef9acb777607abc555ba1",
+        "tijd": 1645871852000,
+        "verandering": 0.00540562,
+        "bitcoinAdresNaam": "NrEen",
+        "bitcoinAdresHash": "bc1qzxq78ncvglf6n2fugkq2ru8x4w53mw6h7zsakx"
+      },
+      {
+        "hash": "3af24047bacf2327d877e69ec0075d0d2d3e2b08ece7a7a40ae294f599287936",
+        "tijd": 1645479240000,
+        "verandering": 0.00527422,
+        "bitcoinAdresNaam": "NrEen",
+        "bitcoinAdresHash": "bc1qzxq78ncvglf6n2fugkq2ru8x4w53mw6h7zsakx"
+      },
+      {
+        "hash": "bc2a6065552a62f71cc084e10192a592b935f6a61bff1fa3faefa28ec9476cad",
+        "tijd": 1645254374000,
+        "verandering": 0.00509303,
+        "bitcoinAdresNaam": "NrEen",
+        "bitcoinAdresHash": "bc1qzxq78ncvglf6n2fugkq2ru8x4w53mw6h7zsakx"
+      },
+      {
+        "hash": "aae61e9756c424a3b90a2f19fe614aa8f19a3e6fa4b95541c71761ce9367f697",
+        "tijd": 1644531745000,
+        "verandering": 0.00867489,
+        "bitcoinAdresNaam": "NrEen",
+        "bitcoinAdresHash": "bc1qzxq78ncvglf6n2fugkq2ru8x4w53mw6h7zsakx"
+      },
+      {
+        "hash": "bb6bb3f3c15d951c5e3bae82ca73c79dd3d1b2b5aab6bd3a4b9ed5295271601b",
+        "tijd": 1644440097000,
+        "verandering": 0.01794068,
+        "bitcoinAdresNaam": "NrEen",
+        "bitcoinAdresHash": "bc1qzxq78ncvglf6n2fugkq2ru8x4w53mw6h7zsakx"
+      },
+      {
+        "hash": "6e981dff7f89ad991b02e0c90ff95deba34da62bac05651e6f3cf87791b9fe34",
+        "tijd": 1643647809000,
+        "verandering": 0.0055927,
+        "bitcoinAdresNaam": "NrEen",
+        "bitcoinAdresHash": "bc1qzxq78ncvglf6n2fugkq2ru8x4w53mw6h7zsakx"
+      },
+      {
+        "hash": "7d841a0dd136dc18d14d386a8bf6c8c7bf46b7ffb511c2168f550c2599e6ec13",
+        "tijd": 1643174255000,
+        "verandering": 0.00570903,
+        "bitcoinAdresNaam": "NrEen",
+        "bitcoinAdresHash": "bc1qzxq78ncvglf6n2fugkq2ru8x4w53mw6h7zsakx"
+      },
+      {
+        "hash": "6b9e714d45f0f458f4837b9849b0767a1a1c55142a0e4efa1d20f3416b0bad4c",
+        "tijd": 1642627151000,
+        "verandering": 0.00578847,
+        "bitcoinAdresNaam": "NrEen",
+        "bitcoinAdresHash": "bc1qzxq78ncvglf6n2fugkq2ru8x4w53mw6h7zsakx"
+      },
+      {
+        "hash": "29d1e00428bfca83b97c4eb3e5cfb8ac211e8fbea4ffad94629f54c04e1f1f8f",
+        "tijd": 1642111080000,
+        "verandering": 0.00534203,
+        "bitcoinAdresNaam": "NrEen",
+        "bitcoinAdresHash": "bc1qzxq78ncvglf6n2fugkq2ru8x4w53mw6h7zsakx"
+      },
+      {
+        "hash": "ede51163cbdf5ca08e8c8c54748d9c19a05549c598b44052609e9a0d7566282a",
+        "tijd": 1641936062000,
+        "verandering": 0.06049036,
+        "bitcoinAdresNaam": "NrEen",
+        "bitcoinAdresHash": "bc1qzxq78ncvglf6n2fugkq2ru8x4w53mw6h7zsakx"
+      },
+      {
+        "hash": "ec3f4f17b8f4a9c30e7c32254eea63c8216abedec5699045f09788739dde5f94",
+        "tijd": 1641934412000,
+        "verandering": 2.6514E-4,
+        "bitcoinAdresNaam": "NrEen",
+        "bitcoinAdresHash": "bc1qzxq78ncvglf6n2fugkq2ru8x4w53mw6h7zsakx"
+      },
+      {
+        "hash": "e8fded5c320d4f1d24232e2354cb0afcdc9e2088fd09b1aa98a8e1aeab8505c4",
+        "tijd": 1641828919000,
+        "verandering": 0.00124218,
+        "bitcoinAdresNaam": "NrEen",
+        "bitcoinAdresHash": "bc1qzxq78ncvglf6n2fugkq2ru8x4w53mw6h7zsakx"
+      }
+    ]
+  }
+]

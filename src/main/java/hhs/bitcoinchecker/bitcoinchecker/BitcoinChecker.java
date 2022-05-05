@@ -9,6 +9,7 @@ import javafx.stage.Stage;
 import java.awt.*;
 import java.io.IOException;
 import java.net.URL;
+import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -23,7 +24,7 @@ public class BitcoinChecker extends Application {
         System.out.println("0) Exit");
     }
 
-    private static void initialiseer() {
+    private static void initialiseer() throws IOException, ParseException {
         Tracker.initialiseer();
 
         // Maak systeem balk object aan
@@ -55,7 +56,7 @@ public class BitcoinChecker extends Application {
         stage.show();
     }
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException, ParseException {
         initialiseer();
         launch();
 
@@ -151,7 +152,7 @@ public class BitcoinChecker extends Application {
                     }
                 }
 
-                TrackedBitcoinAdres bitcoinAdres = new TrackedBitcoinAdres(naam, adres, 0);
+                TrackedBitcoinAdres bitcoinAdres = new TrackedBitcoinAdres(naam, adres);
                 Tracker.voegAdresToe(bitcoinAdres);
 
                 toonMenu();

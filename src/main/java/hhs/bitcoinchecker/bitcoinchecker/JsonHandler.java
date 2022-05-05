@@ -7,6 +7,7 @@ import com.google.gson.reflect.TypeToken;
 import java.io.*;
 import java.lang.reflect.Type;
 import java.net.URL;
+import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Objects;
 
@@ -45,7 +46,7 @@ public class JsonHandler {
         }
     }
 
-    public static ArrayList<TrackedBitcoinAdres> haalTrackedBitcoinAdressenOp() {
+    public static ArrayList<TrackedBitcoinAdres> haalTrackedBitcoinAdressenOp() throws IOException, ParseException {
         // Zoek de gegeven /storage/:fileName file
         String file = (new File("").getAbsolutePath() + "/src/main/resources/hhs/bitcoinchecker/bitcoinchecker/storage/trackedBitcoinAdres.json");
 
@@ -59,6 +60,15 @@ public class JsonHandler {
 
         Type type = new TypeToken<ArrayList<TrackedBitcoinAdres>>(){}.getType();
         assert reader != null;
-        return (ArrayList<TrackedBitcoinAdres>) gson.fromJson(reader, type);
+        ArrayList<TrackedBitcoinAdres> adressen = gson.fromJson(reader, type);
+
+        for(TrackedBitcoinAdres adres : adressen){
+            ArrayList<BitcoinTransactie> bitcoinTransacties = adres.getGeschiedenis();
+            for(BitcoinTransactie transactie : bitcoinTransacties){
+                transactie.setBitcoinAdres(transactie.getBitcoinAdresNaam(), transactie.getBitcoinAdresHash());
+            }
+        }
+
+        return adressen;
     }
 }
