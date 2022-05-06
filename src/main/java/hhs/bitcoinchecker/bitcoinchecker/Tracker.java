@@ -41,16 +41,20 @@ public class Tracker {
         Double prijs = Blockchain.getBitcoinPrijs();
         ArrayList<BitcoinTransactie> geschiedenis = Blockchain.getAdresGeschiedenis(bitcoinAdres);
         long tijd = System.currentTimeMillis();
+        if(geschiedenis == null){
+            bitcoinAdres.setLaatstGecontroleerd(tijd);
+            return;
+        }
 
-        for(int i = 0; i < geschiedenis.size(); i++){
-            BitcoinTransactie ts = geschiedenis.get(i);
-            if(bitcoinAdres.getLaatstGecontroleerd() < ts.getTijd()){
+        for (BitcoinTransactie ts : geschiedenis) {
+            if (bitcoinAdres.getLaatstGecontroleerd() < ts.getTijd()) {
                 System.out.println(ts.getHash());
                 System.out.println(ts.getBitcoinAdres());
                 System.out.println(ts.getTijd());
                 stuurMelding(ts, prijs);
-            };
+            }
         }
+
         bitcoinAdres.setLaatstGecontroleerd(tijd);
         JsonHandler.slaTrackedBitcoinAdressenOp();
     }
@@ -61,7 +65,7 @@ public class Tracker {
         String caption = null;
         String text = null;
         String adresNaam = bitcoinTransactie.getBitcoinAdres().getNaam();
-        String adresHash = bitcoinTransactie.getBitcoinAdres().getAdres();
+        String adresHash = bitcoinTransactie.getBitcoinAdres().getHash();
         long laatstGecontroleerd = 0;
 
         boolean adresWordtGevolgd = false;
@@ -98,8 +102,9 @@ public class Tracker {
         boolean bestaatAl = false;
         for (TrackedBitcoinAdres adres : adressen) {
             String naam = adres.getNaam();
-            if (bitcoinAdres.getNaam().equals(naam)) {
-                bitcoinAdres.setAdres(adres.getAdres());
+            String hash = adres.getHash();
+            if (bitcoinAdres.getNaam().equals(naam) || bitcoinAdres.getHash().equals(hash)) {
+                bitcoinAdres.setHash(adres.getHash());
                 bestaatAl = true;
             }
         }
@@ -114,7 +119,7 @@ public class Tracker {
     public static void verwijderAdres(TrackedBitcoinAdres bitcoinAdres) {
         for(int i = 0; i < adressen.size(); i++){
             TrackedBitcoinAdres adres = adressen.get(i);
-            if(bitcoinAdres.getAdres().equals(adres.getAdres())){
+            if(bitcoinAdres.getHash().equals(adres.getHash())){
                 adressen.remove(i);
                 break;
             }

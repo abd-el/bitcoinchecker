@@ -8,13 +8,13 @@ import javafx.stage.Stage;
 
 import java.awt.*;
 import java.io.IOException;
-import java.net.URL;
 import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
 public class BitcoinChecker extends Application {
     public static TrayIcon trayIcon;
+    private static boolean geinitialiseerd = false;
 
     private static void toonMenu(){
         System.out.println("== Menu ==");
@@ -24,7 +24,8 @@ public class BitcoinChecker extends Application {
         System.out.println("0) Exit");
     }
 
-    private static void initialiseer() throws IOException, ParseException {
+    public static void initialiseer() throws IOException, ParseException {
+        if(geinitialiseerd){ return; }
         Tracker.initialiseer();
 
         // Maak systeem balk object aan
@@ -38,6 +39,7 @@ public class BitcoinChecker extends Application {
         // Voeg ook toe aan systeem balk
         try {
             systemTray.add(trayIcon);
+            geinitialiseerd = true;
         } catch (AWTException e) {
             e.printStackTrace();
         }
@@ -77,7 +79,7 @@ public class BitcoinChecker extends Application {
                     System.out.println("Er zijn geen adressen");
                 } else {
                     for (TrackedBitcoinAdres adres : trackedAdressen) {
-                        System.out.println(adres.getNaam() + ": " + adres.getAdres());
+                        System.out.println(adres.getNaam() + ": " + adres.getHash());
                     }
                 }
                 System.out.println("====");
@@ -141,8 +143,8 @@ public class BitcoinChecker extends Application {
                 } else {
                     boolean geldig = true;
                     for (TrackedBitcoinAdres bitcoinAdres : trackedAdressen) {
-                        if (adres.equals(bitcoinAdres.getAdres())) {
-                            System.out.println("Adres " + bitcoinAdres.getAdres() + " bestaat al met de naam " + bitcoinAdres.getNaam() + "!");
+                        if (adres.equals(bitcoinAdres.getHash())) {
+                            System.out.println("Adres " + bitcoinAdres.getHash() + " bestaat al met de naam " + bitcoinAdres.getNaam() + "!");
                             geldig = false;
                             break;
                         }

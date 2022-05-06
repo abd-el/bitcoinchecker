@@ -63,10 +63,7 @@ public class JsonHandler {
         ArrayList<TrackedBitcoinAdres> adressen = gson.fromJson(reader, type);
 
         for(TrackedBitcoinAdres adres : adressen){
-            ArrayList<BitcoinTransactie> bitcoinTransacties = adres.getGeschiedenis();
-            for(BitcoinTransactie transactie : bitcoinTransacties){
-                transactie.setBitcoinAdres(transactie.getBitcoinAdresNaam(), transactie.getBitcoinAdresHash());
-            }
+            adres.setGeschiedenis(Blockchain.getAdresGeschiedenis(adres));
         }
 
         return adressen;

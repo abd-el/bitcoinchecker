@@ -41,7 +41,7 @@ public class Blockchain {
     }
 
     public static Double getAdresSaldo(BitcoinAdres adres) throws IOException {
-        URL myurl = new URL("https://api.blockchair.com/bitcoin/dashboards/address/"+ adres.getAdres() +"?transaction_details=true?limit=25");
+        URL myurl = new URL("https://api.blockchair.com/bitcoin/dashboards/address/"+ adres.getHash() +"?transaction_details=true?limit=25");
 
         HttpsURLConnection con = (HttpsURLConnection) myurl.openConnection();
         con.setRequestMethod("GET");
@@ -56,14 +56,14 @@ public class Blockchain {
         }
 
         JsonObject jsonObject = gson.fromJson(fullResponse, JsonObject.class);
-        jsonObject = jsonObject.getAsJsonObject("data").getAsJsonObject(adres.getAdres()).getAsJsonObject("address");
+        jsonObject = jsonObject.getAsJsonObject("data").getAsJsonObject(adres.getHash()).getAsJsonObject("address");
         Double saldo = jsonObject.get("balance").getAsDouble() / 100000000;
 
         return saldo;
     }
 
     public static ArrayList<BitcoinTransactie> getAdresGeschiedenis(BitcoinAdres adres) throws IOException, ParseException {
-        URL myurl = new URL("https://api.blockchair.com/bitcoin/dashboards/address/"+ adres.getAdres() +"?transaction_details=true?limit=25");
+        URL myurl = new URL("https://api.blockchair.com/bitcoin/dashboards/address/"+ adres.getHash() +"?transaction_details=true?limit=25");
 
         HttpsURLConnection con = (HttpsURLConnection) myurl.openConnection();
         con.setRequestMethod("GET");
@@ -79,7 +79,9 @@ public class Blockchain {
 
         JsonObject jsonObject = gson.fromJson(fullResponse, JsonObject.class)
                 .getAsJsonObject("data")
-                .getAsJsonObject(adres.getAdres());
+                .getAsJsonObject(adres.getHash());
+
+        if(jsonObject == null){ return null; }
 
         JsonArray jsonArray = jsonObject.getAsJsonArray("transactions");
         ArrayList<BitcoinTransactie> transacties = new ArrayList<>();

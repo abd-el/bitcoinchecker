@@ -6,27 +6,27 @@ import java.util.ArrayList;
 
 public abstract class BitcoinAdres {
     private String naam;
-    private String adres;
+    private String hash;
     private Double saldo;
     private ArrayList<BitcoinTransactie> geschiedenis;
 
-    public BitcoinAdres(String naam, String adres, Double saldo, ArrayList<BitcoinTransactie> geschiedenis) {
+    public BitcoinAdres(String naam, String hash, Double saldo, ArrayList<BitcoinTransactie> geschiedenis) {
         this.naam = naam;
-        this.adres = adres;
+        this.hash = hash;
         this.saldo = saldo;
         this.geschiedenis = geschiedenis;
     }
 
-    public BitcoinAdres(String naam, String adres, Double saldo) throws IOException, ParseException {
+    public BitcoinAdres(String naam, String hash, Double saldo) throws IOException, ParseException {
         this.naam = naam;
-        this.adres = adres;
+        this.hash = hash;
         this.saldo = saldo;
         this.geschiedenis = Blockchain.getAdresGeschiedenis(this);
     }
 
-    public BitcoinAdres(String naam, String adres) throws IOException, ParseException {
+    public BitcoinAdres(String naam, String hash) throws IOException, ParseException {
         this.naam = naam;
-        this.adres = adres;
+        this.hash = hash;
         this.geschiedenis = Blockchain.getAdresGeschiedenis(this);
     }
 
@@ -34,8 +34,8 @@ public abstract class BitcoinAdres {
         this.naam = naam;
     }
 
-    public void setAdres(String adres) {
-        this.adres = adres;
+    public void setHash(String hash) {
+        this.hash = hash;
     }
 
     public void setSaldo(Double saldo) {
@@ -50,8 +50,8 @@ public abstract class BitcoinAdres {
         return naam;
     }
 
-    public String getAdres() {
-        return adres;
+    public String getHash() {
+        return hash;
     }
 
     public Double getSaldo() {
