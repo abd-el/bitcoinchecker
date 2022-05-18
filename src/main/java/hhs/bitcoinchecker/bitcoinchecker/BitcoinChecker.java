@@ -14,6 +14,11 @@ import java.util.Scanner;
 
 public class BitcoinChecker extends Application {
     public static TrayIcon trayIcon;
+<<<<<<< Updated upstream
+=======
+    private static boolean geinitialiseerd = false;
+    public static Stage stage;
+>>>>>>> Stashed changes
 
     private static void toonMenu(){
         System.out.println("== Menu ==");
@@ -23,7 +28,12 @@ public class BitcoinChecker extends Application {
         System.out.println("0) Exit");
     }
 
+<<<<<<< Updated upstream
     private static void initialiseer() throws AWTException {
+=======
+    public static void initialiseer() {
+        if(geinitialiseerd){ return; }
+>>>>>>> Stashed changes
         Tracker.initialiseer();
 
         SystemTray systemTray = SystemTray.getSystemTray();
@@ -34,19 +44,32 @@ public class BitcoinChecker extends Application {
     }
 
     @Override
-    public void start(Stage stage) throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(BitcoinChecker.class.getResource("fxml/view.fxml"));
-        Scene scene = new Scene(fxmlLoader.load());
-
+    public void start(Stage stage) {
+        BitcoinChecker.stage = stage;
         Image JavaFXimage = new Image(String.valueOf(BitcoinChecker.class.getResource("images/btc-icon.png")));
         stage.getIcons().add(JavaFXimage);
-
-        stage.setTitle("Bitcoin Checker!");
-        stage.setScene(scene);
+        stage.setTitle("Bitcoin Checker");
+        setScene("AdressenView.fxml");
         stage.show();
     }
 
+    public static void setScene(String fileNaam) {
+        FXMLLoader fxmlLoader = new FXMLLoader(BitcoinChecker.class.getResource("fxml/" + fileNaam));
+        Scene scene = null;
+        try {
+            scene = new Scene(fxmlLoader.load());
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        stage.setScene(scene);
+    }
+
     public static void main(String[] args) {
+<<<<<<< Updated upstream
+=======
+        initialiseer();
+>>>>>>> Stashed changes
         launch();
         try {
             initialiseer();
@@ -78,30 +101,8 @@ public class BitcoinChecker extends Application {
                 toonMenu();
                 gekozen = scannerInt.nextInt();
             } else if (gekozen == 2) {
-                ArrayList<TrackedBitcoinAdres> trackedAdressen = Tracker.getAdressen();
-                // scanner.close();
-                System.out.println("Geef de naam. Type exit om te verlaten");
-                String naam = scannerLine.nextLine();
-                if (naam.equals("exit")) {
-                    // Er gebeurt hier niets
-                } else if (trackedAdressen.size() == 0) {
-                    System.out.println("Er zijn geen adressen");
-                } else {
-                    boolean gevonden = false;
-                    for (TrackedBitcoinAdres adres : trackedAdressen) {
-                        if (naam.equals(adres.getNaam())) {
-                            Tracker.verwijderAdres(adres);
-                            System.out.println("Adres " + naam + " verwijdert!");
-                            gevonden = true;
-                            break;
-                        }
-                    }
-                    if (!gevonden) {
-                        System.out.println("Geen adres gevonden met de naam " + naam + "!");
-                    }
-                }
+                System.out.println("Gebruik de GUI");
                 toonMenu();
-                gekozen = scannerInt.nextInt();
             } else if (gekozen == 3) {
                 System.out.println("Geef een naam. Type exit om te verlaten");
                 String naam = scannerLine.nextLine();

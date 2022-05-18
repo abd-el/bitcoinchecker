@@ -11,4 +11,6 @@ module hhs.bitcoinchecker.bitcoinchecker {
 
     opens hhs.bitcoinchecker.bitcoinchecker to javafx.fxml, com.google.gson;
     exports hhs.bitcoinchecker.bitcoinchecker;
+    exports hhs.bitcoinchecker.bitcoinchecker.controllers;
+    opens hhs.bitcoinchecker.bitcoinchecker.controllers to com.google.gson, javafx.fxml;
 }

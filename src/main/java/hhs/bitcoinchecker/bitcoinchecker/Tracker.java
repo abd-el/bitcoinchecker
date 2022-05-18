@@ -24,7 +24,11 @@ public class Tracker {
         }
     };
 
+<<<<<<< Updated upstream
     public static void initialiseer(){
+=======
+    public static void initialiseer() {
+>>>>>>> Stashed changes
         ArrayList<TrackedBitcoinAdres> adressen = JsonHandler.haalTrackedBitcoinAdressenOp();
         setAdressen(adressen);
 
