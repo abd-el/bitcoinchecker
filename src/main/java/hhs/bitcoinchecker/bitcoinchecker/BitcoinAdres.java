@@ -15,21 +15,13 @@ public abstract class BitcoinAdres {
         this.geschiedenis = geschiedenis;
     }
 
-<<<<<<< Updated upstream
-    public BitcoinAdres(String naam, String adres, Double saldo) {
-=======
     public BitcoinAdres(String naam, String hash, Double saldo) {
->>>>>>> Stashed changes
         this.naam = naam;
         this.adres = adres;
         this.saldo = saldo;
     }
 
-<<<<<<< Updated upstream
-    public BitcoinAdres(String naam, String adres) {
-=======
     public BitcoinAdres(String naam, String hash) {
->>>>>>> Stashed changes
         this.naam = naam;
         this.adres = adres;
     }

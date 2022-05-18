@@ -64,10 +64,6 @@ public class Blockchain {
         return saldo;
     }
 
-<<<<<<< Updated upstream
-    public static ArrayList<BitcoinTransactie> getAdresGeschiedenis(BitcoinAdres adres) throws IOException, ParseException {
-        URL myurl = new URL("https://api.blockchair.com/bitcoin/dashboards/address/"+ adres.getAdres() +"?transaction_details=true?limit=25");
-=======
     public static ArrayList<BitcoinTransactie> getAdresGeschiedenis(BitcoinAdres adres) {
         URL myurl = null;
         try {
@@ -75,7 +71,6 @@ public class Blockchain {
         } catch (MalformedURLException e) {
             e.printStackTrace();
         }
->>>>>>> Stashed changes
 
         HttpsURLConnection con = null;
         try {

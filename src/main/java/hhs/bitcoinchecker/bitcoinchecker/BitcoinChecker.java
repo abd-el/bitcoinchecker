@@ -14,11 +14,8 @@ import java.util.Scanner;
 
 public class BitcoinChecker extends Application {
     public static TrayIcon trayIcon;
-<<<<<<< Updated upstream
-=======
     private static boolean geinitialiseerd = false;
     public static Stage stage;
->>>>>>> Stashed changes
 
     private static void toonMenu(){
         System.out.println("== Menu ==");
@@ -28,12 +25,8 @@ public class BitcoinChecker extends Application {
         System.out.println("0) Exit");
     }
 
-<<<<<<< Updated upstream
-    private static void initialiseer() throws AWTException {
-=======
     public static void initialiseer() {
         if(geinitialiseerd){ return; }
->>>>>>> Stashed changes
         Tracker.initialiseer();
 
         SystemTray systemTray = SystemTray.getSystemTray();
@@ -66,10 +59,7 @@ public class BitcoinChecker extends Application {
     }
 
     public static void main(String[] args) {
-<<<<<<< Updated upstream
-=======
         initialiseer();
->>>>>>> Stashed changes
         launch();
         try {
             initialiseer();
