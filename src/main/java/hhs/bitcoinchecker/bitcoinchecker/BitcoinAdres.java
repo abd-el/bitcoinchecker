@@ -15,13 +15,13 @@ public abstract class BitcoinAdres {
         this.geschiedenis = geschiedenis;
     }
 
-    public BitcoinAdres(String naam, String adres, Double saldo) {
+    public BitcoinAdres(String naam, String hash, Double saldo) {
         this.naam = naam;
         this.adres = adres;
         this.saldo = saldo;
     }
 
-    public BitcoinAdres(String naam, String adres) {
+    public BitcoinAdres(String naam, String hash) {
         this.naam = naam;
         this.adres = adres;
     }

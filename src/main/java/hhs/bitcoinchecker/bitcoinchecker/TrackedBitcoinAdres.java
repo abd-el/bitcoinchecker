@@ -20,6 +20,11 @@ public class TrackedBitcoinAdres extends BitcoinAdres {
         this.laatstGecontroleerd = laatstGecontroleerd;
     }
 
+    public TrackedBitcoinAdres(String naam, String adres) {
+        super(naam, adres);
+        this.laatstGecontroleerd = 0;
+    }
+
     public long getLaatstGecontroleerd() {
         return laatstGecontroleerd;
     }
