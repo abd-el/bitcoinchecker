@@ -24,7 +24,7 @@ public class Tracker {
         }
     };
 
-    public static void initialiseer() throws IOException, ParseException {
+    public static void initialiseer() {
         ArrayList<TrackedBitcoinAdres> adressen = JsonHandler.haalTrackedBitcoinAdressenOp();
         setAdressen(adressen);
 

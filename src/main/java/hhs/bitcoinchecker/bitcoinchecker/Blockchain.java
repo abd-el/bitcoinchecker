@@ -8,6 +8,8 @@ import javax.net.ssl.HttpsURLConnection;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.net.MalformedURLException;
+import java.net.ProtocolException;
 import java.net.URL;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -62,18 +64,46 @@ public class Blockchain {
         return saldo;
     }
 
-    public static ArrayList<BitcoinTransactie> getAdresGeschiedenis(BitcoinAdres adres) throws IOException, ParseException {
-        URL myurl = new URL("https://api.blockchair.com/bitcoin/dashboards/address/"+ adres.getHash() +"?transaction_details=true?limit=25");
+    public static ArrayList<BitcoinTransactie> getAdresGeschiedenis(BitcoinAdres adres) {
+        URL myurl = null;
+        try {
+            myurl = new URL("https://api.blockchair.com/bitcoin/dashboards/address/"+ adres.getHash() +"?transaction_details=true?limit=25");
+        } catch (MalformedURLException e) {
+            e.printStackTrace();
+        }
 
-        HttpsURLConnection con = (HttpsURLConnection) myurl.openConnection();
-        con.setRequestMethod("GET");
+        HttpsURLConnection con = null;
+        try {
+            assert myurl != null;
+            con = (HttpsURLConnection) myurl.openConnection();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        try {
+            assert con != null;
+            con.setRequestMethod("GET");
+        } catch (ProtocolException e) {
+            e.printStackTrace();
+        }
+  
         con.setRequestProperty("Content-Type", "application/json");
         con.setDoOutput(true);
 
-        BufferedReader br = new BufferedReader(new InputStreamReader(con.getInputStream()));
+        BufferedReader br = null;
+        try {
+            br = new BufferedReader(new InputStreamReader(con.getInputStream()));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
         String fullResponse = "";
-        String txt;
-        while ((txt = br.readLine()) != null){
+        String txt = null;
+        while (true){
+            try {
+                assert br != null;
+                if ((txt = br.readLine()) == null) break;
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
             fullResponse = fullResponse + txt;
         }
 
@@ -95,7 +125,13 @@ public class Blockchain {
             SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.US);
             format.setTimeZone(TimeZone.getTimeZone("UTC"));
 
-            Date date = format.parse(jObj.get("time").getAsString());
+            Date date = null;
+            try {
+                date = format.parse(jObj.get("time").getAsString());
+            } catch (ParseException e) {
+                e.printStackTrace();
+            }
+            assert date != null;
             long tijd = date.getTime();
 
             BitcoinTransactie transactie = new BitcoinTransactie(adres, hash, tijd, change);

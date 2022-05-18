@@ -17,14 +17,14 @@ public abstract class BitcoinAdres {
         this.geschiedenis = geschiedenis;
     }
 
-    public BitcoinAdres(String naam, String hash, Double saldo) throws IOException, ParseException {
+    public BitcoinAdres(String naam, String hash, Double saldo) {
         this.naam = naam;
         this.hash = hash;
         this.saldo = saldo;
         this.geschiedenis = Blockchain.getAdresGeschiedenis(this);
     }
 
-    public BitcoinAdres(String naam, String hash) throws IOException, ParseException {
+    public BitcoinAdres(String naam, String hash) {
         this.naam = naam;
         this.hash = hash;
         this.geschiedenis = Blockchain.getAdresGeschiedenis(this);

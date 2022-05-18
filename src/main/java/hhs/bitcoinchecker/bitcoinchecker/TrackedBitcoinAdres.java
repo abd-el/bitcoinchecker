@@ -22,7 +22,7 @@ public class TrackedBitcoinAdres extends BitcoinAdres {
         this.laatstGecontroleerd = laatstGecontroleerd;
     }
 
-    public TrackedBitcoinAdres(String naam, String adres) throws IOException, ParseException {
+    public TrackedBitcoinAdres(String naam, String adres) {
         super(naam, adres);
         this.laatstGecontroleerd = 0;
     }
