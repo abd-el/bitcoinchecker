@@ -6,15 +6,13 @@ import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.stage.Stage;
 
-import java.awt.*;
+import java.awt.TrayIcon;
 import java.io.IOException;
-import java.net.URL;
 import java.util.ArrayList;
 import java.util.Scanner;
 
 public class BitcoinChecker extends Application {
     public static TrayIcon trayIcon;
-    private static boolean geinitialiseerd = false;
     public static Stage stage;
 
     private static void toonMenu(){
@@ -23,17 +21,6 @@ public class BitcoinChecker extends Application {
         System.out.println("2) Verwijder adres");
         System.out.println("3) Voeg adres toe");
         System.out.println("0) Exit");
-    }
-
-    public static void initialiseer() {
-        if(geinitialiseerd){ return; }
-        Tracker.initialiseer();
-
-        SystemTray systemTray = SystemTray.getSystemTray();
-        java.awt.Image JWTimage = Toolkit.getDefaultToolkit().getImage(String.valueOf(BitcoinChecker.class.getResource("images/btc-icon.png")));
-        trayIcon = new TrayIcon(JWTimage, "Bitcoin Checker");
-        trayIcon.setImageAutoSize(true);
-        systemTray.add(trayIcon);
     }
 
     @Override
@@ -59,13 +46,7 @@ public class BitcoinChecker extends Application {
     }
 
     public static void main(String[] args) {
-        initialiseer();
         launch();
-        try {
-            initialiseer();
-        } catch (AWTException e) {
-            e.printStackTrace();
-        }
 
         // MENU
         toonMenu();
@@ -84,7 +65,7 @@ public class BitcoinChecker extends Application {
                     System.out.println("Er zijn geen adressen");
                 } else {
                     for (TrackedBitcoinAdres adres : trackedAdressen) {
-                        System.out.println(adres.getNaam() + ": " + adres.getAdres());
+                        System.out.println(adres.getNaam() + ": " + adres.getHash());
                     }
                 }
                 System.out.println("====");
@@ -126,8 +107,8 @@ public class BitcoinChecker extends Application {
                 } else {
                     boolean geldig = true;
                     for (TrackedBitcoinAdres bitcoinAdres : trackedAdressen) {
-                        if (adres.equals(bitcoinAdres.getAdres())) {
-                            System.out.println("Adres " + bitcoinAdres.getAdres() + " bestaat al met de naam " + bitcoinAdres.getNaam() + "!");
+                        if (adres.equals(bitcoinAdres.getHash())) {
+                            System.out.println("Adres " + bitcoinAdres.getHash() + " bestaat al met de naam " + bitcoinAdres.getNaam() + "!");
                             geldig = false;
                             break;
                         }

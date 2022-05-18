@@ -5,23 +5,23 @@ import java.util.ArrayList;
 public class TrackedBitcoinAdres extends BitcoinAdres {
     private long laatstGecontroleerd;
 
-    public TrackedBitcoinAdres(String naam, String adres, Double saldo, ArrayList<BitcoinTransactie> geschiedenis, long laatstGecontroleerd) {
-        super(naam, adres, saldo, geschiedenis);
+    public TrackedBitcoinAdres(String naam, String hash, Double saldo, ArrayList<BitcoinTransactie> geschiedenis, long laatstGecontroleerd) {
+        super(naam, hash, saldo, geschiedenis);
         this.laatstGecontroleerd = laatstGecontroleerd;
     }
 
-    public TrackedBitcoinAdres(String naam, String adres, Double saldo, long laatstGecontroleerd) {
-        super(naam, adres, saldo);
+    public TrackedBitcoinAdres(String naam, String hash, Double saldo, long laatstGecontroleerd) {
+        super(naam, hash, saldo);
         this.laatstGecontroleerd = laatstGecontroleerd;
     }
 
-    public TrackedBitcoinAdres(String naam, String adres, long laatstGecontroleerd) {
-        super(naam, adres);
+    public TrackedBitcoinAdres(String naam, String hash, long laatstGecontroleerd) {
+        super(naam, hash);
         this.laatstGecontroleerd = laatstGecontroleerd;
     }
 
-    public TrackedBitcoinAdres(String naam, String adres) {
-        super(naam, adres);
+    public TrackedBitcoinAdres(String naam, String hash) {
+        super(naam, hash);
         this.laatstGecontroleerd = 0;
     }
 

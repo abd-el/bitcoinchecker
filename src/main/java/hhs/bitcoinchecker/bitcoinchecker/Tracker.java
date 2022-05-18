@@ -61,7 +61,7 @@ public class Tracker {
         String caption;
         String text;
         String adresNaam = bitcoinTransactie.getBitcoinAdres().getNaam();
-        String adresHash = bitcoinTransactie.getBitcoinAdres().getAdres();
+        String adresHash = bitcoinTransactie.getBitcoinAdres().getHash();
 
         if( totaal > 0 ){
             caption = "Bitcoin gestort!";
@@ -78,7 +78,7 @@ public class Tracker {
         for (TrackedBitcoinAdres adres : adressen) {
             String naam = adres.getNaam();
             if (bitcoinAdres.getNaam().equals(naam)) {
-                bitcoinAdres.setAdres(adres.getAdres());
+                bitcoinAdres.setHash(adres.getHash());
                 bestaatAl = true;
             }
         }
@@ -93,7 +93,7 @@ public class Tracker {
     public static void verwijderAdres(TrackedBitcoinAdres bitcoinAdres) {
         for(int i = 0; i < adressen.size(); i++){
             TrackedBitcoinAdres adres = adressen.get(i);
-            if(bitcoinAdres.getAdres().equals(adres.getAdres())){
+            if(bitcoinAdres.getHash().equals(adres.getHash())){
                 adressen.remove(i);
                 break;
             }
