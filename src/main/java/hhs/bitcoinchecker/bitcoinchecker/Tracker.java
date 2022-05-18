@@ -16,11 +16,7 @@ public class Tracker {
     public static final TimerTask timerTask = new TimerTask() {
         @Override
         public void run() {
-            try {
-                controleerAlleAdressen();
-            } catch (IOException | ParseException e) {
-                e.printStackTrace();
-            }
+            controleerAlleAdressen();
         }
     };
 
@@ -31,25 +27,24 @@ public class Tracker {
         timer.scheduleAtFixedRate(timerTask, 0, 5 * 60 * 1000);
     }
 
-    private static void controleerAlleAdressen() throws IOException, ParseException {
+    private static void controleerAlleAdressen() {
         for (TrackedBitcoinAdres adres : adressen) {
             controleerAdres(adres);
         }
     }
 
-    public static void controleerAdres(TrackedBitcoinAdres bitcoinAdres) throws IOException, ParseException {
+    public static void controleerAdres(TrackedBitcoinAdres bitcoinAdres) {
         Double prijs = Blockchain.getBitcoinPrijs();
         ArrayList<BitcoinTransactie> geschiedenis = Blockchain.getAdresGeschiedenis(bitcoinAdres);
         long tijd = System.currentTimeMillis();
 
-        for(int i = 0; i < geschiedenis.size(); i++){
-            BitcoinTransactie ts = geschiedenis.get(i);
-            if(bitcoinAdres.getLaatstGecontroleerd() < ts.getTijd()){
+        for (BitcoinTransactie ts : geschiedenis) {
+            if (bitcoinAdres.getLaatstGecontroleerd() < ts.getTijd()) {
                 System.out.println(ts.getHash());
                 System.out.println(ts.getBitcoinAdres());
                 System.out.println(ts.getTijd());
                 stuurMelding(ts, prijs);
-            };
+            }
         }
         bitcoinAdres.setLaatstGecontroleerd(tijd);
         JsonHandler.slaTrackedBitcoinAdressenOp();
@@ -102,7 +97,7 @@ public class Tracker {
         JsonHandler.slaTrackedBitcoinAdressenOp();
     }
 
-    public static ArrayList<TrackedBitcoinAdres> getAdressen() {
+    public static @NotNull ArrayList<TrackedBitcoinAdres> getAdressen() {
         return adressen;
     }
 

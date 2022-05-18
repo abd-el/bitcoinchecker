@@ -10,7 +10,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class BlockchainTest {
     @Test
-    public void Test() throws IOException, ParseException {
+    public void Test() {
         // Arrange
         Tracker.initialiseer();
         TrackedBitcoinAdres bitcoinAdres = new TrackedBitcoinAdres("Main","bc1qzxq78ncvglf6n2fugkq2ru8x4w53mw6h7zsakx",0);

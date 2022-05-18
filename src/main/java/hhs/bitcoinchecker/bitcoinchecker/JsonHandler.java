@@ -58,7 +58,6 @@ public class JsonHandler {
 
         Type type = new TypeToken<ArrayList<TrackedBitcoinAdres>>(){}.getType();
         assert reader != null;
-        ArrayList<TrackedBitcoinAdres> trackedBitcoinAdres = (ArrayList<TrackedBitcoinAdres>) gson.fromJson(reader, type);
-        return trackedBitcoinAdres;
+        return gson.fromJson(reader, type);
     }
 }
