@@ -5,6 +5,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 
 import javax.imageio.ImageIO;
 import java.awt.*;
@@ -65,6 +66,7 @@ public class BitcoinChecker extends Application {
         stage.getIcons().add(JavaFXimage);
         stage.setTitle("Bitcoin Checker");
         setScene("AdressenView.fxml");
+        stage.setResizable(false);
         stage.show();
     }
 
