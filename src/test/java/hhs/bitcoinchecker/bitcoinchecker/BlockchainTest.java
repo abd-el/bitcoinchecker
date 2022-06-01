@@ -19,7 +19,7 @@ public class BlockchainTest {
         // Act
 
         ArrayList<TrackedBitcoinAdres> opgehaaldeAdressen = JsonHandler.haalTrackedBitcoinAdressenOp();
-        // ArrayList<BitcoinTransactie> geschiedenis = Blockchain.getAdresGeschiedenis(bitcoinAdres);
+        // ArrayList<BitcoinTransactie> geschiedenis = bitcoinAdres.getGeschiedenisVanBlockchain();
 
         // Assert
 

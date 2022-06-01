@@ -29,28 +29,11 @@ public class Tracker {
 
     private static void controleerAlleAdressen() {
         for (TrackedBitcoinAdres adres : adressen) {
-            controleerAdres(adres);
+            adres.controleer();
         }
     }
 
-    public static void controleerAdres(TrackedBitcoinAdres bitcoinAdres) {
-        Double prijs = Blockchain.getBitcoinPrijs();
-        ArrayList<BitcoinTransactie> geschiedenis = Blockchain.getAdresGeschiedenis(bitcoinAdres);
-        long tijd = System.currentTimeMillis();
-
-        for (BitcoinTransactie ts : geschiedenis) {
-            if (bitcoinAdres.getLaatstGecontroleerd() < ts.getTijd()) {
-                System.out.println(ts.getHash());
-                System.out.println(ts.getBitcoinAdres());
-                System.out.println(ts.getTijd());
-                stuurMelding(ts, prijs);
-            }
-        }
-        bitcoinAdres.setLaatstGecontroleerd(tijd);
-        JsonHandler.slaTrackedBitcoinAdressenOp();
-    }
-
-    private static void stuurMelding(BitcoinTransactie bitcoinTransactie, Double prijs){
+    public static void stuurMelding(BitcoinTransactie bitcoinTransactie, Double prijs){
         double totaal = bitcoinTransactie.getVerandering() * prijs;
         totaal = Math.round(totaal * 100.0) / 100.0;
         String caption;

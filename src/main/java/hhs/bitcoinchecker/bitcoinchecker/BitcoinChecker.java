@@ -15,9 +15,9 @@ import java.util.Objects;
 
 public class BitcoinChecker extends Application {
     public static TrayIcon trayIcon;
-    public static Stage stage;
+    private static Stage stage;
 
-    private void maakBalkIcoon(){
+    private static void maakBalkIcoon(){
         // java.awt omdat balk icoon niet kan in javafx
         java.awt.Image trayImage = Toolkit.getDefaultToolkit().getImage(BitcoinChecker.class.getResource("images/btc-icon.png"));
 
@@ -52,7 +52,6 @@ public class BitcoinChecker extends Application {
 
         stage.setScene(scene);
     }
-
 
     @Override
     public void start(Stage stage) {

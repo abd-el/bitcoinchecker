@@ -9,7 +9,7 @@ import java.lang.reflect.Type;
 import java.util.ArrayList;
 
 public class JsonHandler {
-    static Gson gson = new GsonBuilder().setPrettyPrinting().create();
+    public static Gson gson = new GsonBuilder().setPrettyPrinting().create();
 
     public static void slaTrackedBitcoinAdressenOp() {
         // Verkrijg de adressen

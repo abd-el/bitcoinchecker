@@ -14,8 +14,6 @@ import java.util.ResourceBundle;
 
 public class AdressenViewController implements Initializable {
     @FXML
-    private Button button;
-    @FXML
     private Button voegAdresToe;
     @FXML
     private TableView<TrackedBitcoinAdres> adresTabel;
