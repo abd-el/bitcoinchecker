@@ -44,7 +44,7 @@ public class AdressenViewController implements Initializable {
 
     @FXML
     protected void updateTabel(){
-        adresTabel.getItems().removeAll();
+        adresTabel.getItems().clear();
         ArrayList<TrackedBitcoinAdres> adressen = Tracker.getAdressen();
         for (TrackedBitcoinAdres trackedBitcoinAdres : adressen) {
             voegAdresToe(trackedBitcoinAdres);
