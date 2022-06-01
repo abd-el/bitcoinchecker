@@ -21,47 +21,99 @@ import java.util.TimeZone;
 public class Blockchain {
     private static Gson gson = new Gson();
 
-    public static Double getBitcoinPrijs() throws IOException {
-        URL myurl = new URL("https://api.coinbase.com/v2/prices/spot?currency=EUR");
+    public static Double getBitcoinPrijs() {
+        URL myurl = null;
+        try {
+            myurl = new URL("https://api.coinbase.com/v2/prices/spot?currency=EUR");
+        } catch (MalformedURLException e) {
+            e.printStackTrace();
+        }
 
-        HttpsURLConnection con = (HttpsURLConnection) myurl.openConnection();
-        con.setRequestMethod("GET");
+        HttpsURLConnection con = null;
+        try {
+            assert myurl != null;
+            con = (HttpsURLConnection) myurl.openConnection();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        try {
+            assert con != null;
+            con.setRequestMethod("GET");
+        } catch (ProtocolException e) {
+            e.printStackTrace();
+        }
         con.setRequestProperty("Content-Type", "application/json");
         con.setDoOutput(true);
 
-        BufferedReader br = new BufferedReader(new InputStreamReader(con.getInputStream()));
+        BufferedReader br = null;
+        try {
+            br = new BufferedReader(new InputStreamReader(con.getInputStream()));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
         String fullResponse = "";
-        String i;
-        while ((i = br.readLine()) != null){
+        String i = null;
+        while (true){
+            try {
+                assert br != null;
+                if ((i = br.readLine()) == null) break;
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
             fullResponse = fullResponse + i;
         }
 
         JsonObject jsonObject = gson.fromJson( fullResponse, JsonObject.class);
-        double amount = Double.parseDouble((jsonObject.getAsJsonObject("data")).get("amount").getAsString());
 
-        return amount;
+        return Double.parseDouble((jsonObject.getAsJsonObject("data")).get("amount").getAsString());
     }
 
-    public static Double getAdresSaldo(BitcoinAdres adres) throws IOException {
-        URL myurl = new URL("https://api.blockchair.com/bitcoin/dashboards/address/"+ adres.getAdres() +"?transaction_details=true?limit=25");
+    public static Double getAdresSaldo(BitcoinAdres adres) {
+        URL myurl = null;
+        try {
+            myurl = new URL("https://api.blockchair.com/bitcoin/dashboards/address/"+ adres.getHash() +"?transaction_details=true?limit=25");
+        } catch (MalformedURLException e) {
+            e.printStackTrace();
+        }
 
-        HttpsURLConnection con = (HttpsURLConnection) myurl.openConnection();
-        con.setRequestMethod("GET");
+        HttpsURLConnection con = null;
+        try {
+            assert myurl != null;
+            con = (HttpsURLConnection) myurl.openConnection();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        try {
+            assert con != null;
+            con.setRequestMethod("GET");
+        } catch (ProtocolException e) {
+            e.printStackTrace();
+        }
         con.setRequestProperty("Content-Type", "application/json");
         con.setDoOutput(true);
 
-        BufferedReader br = new BufferedReader(new InputStreamReader(con.getInputStream()));
+        BufferedReader br = null;
+        try {
+            br = new BufferedReader(new InputStreamReader(con.getInputStream()));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
         String fullResponse = "";
-        String i;
-        while ((i = br.readLine()) != null){
+        String i = null;
+        while (true){
+            try {
+                assert br != null;
+                if ((i = br.readLine()) == null) break;
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
             fullResponse = fullResponse + i;
         }
 
         JsonObject jsonObject = gson.fromJson(fullResponse, JsonObject.class);
-        jsonObject = jsonObject.getAsJsonObject("data").getAsJsonObject(adres.getAdres()).getAsJsonObject("address");
-        Double saldo = jsonObject.get("balance").getAsDouble() / 100000000;
+        jsonObject = jsonObject.getAsJsonObject("data").getAsJsonObject(adres.getHash()).getAsJsonObject("address");
 
-        return saldo;
+        return jsonObject.get("balance").getAsDouble() / 100000000;
     }
 
     public static ArrayList<BitcoinTransactie> getAdresGeschiedenis(BitcoinAdres adres) {
@@ -108,7 +160,7 @@ public class Blockchain {
 
         JsonObject jsonObject = gson.fromJson(fullResponse, JsonObject.class)
                 .getAsJsonObject("data")
-                .getAsJsonObject(adres.getAdres());
+                .getAsJsonObject(adres.getHash());
 
         JsonArray jsonArray = jsonObject.getAsJsonArray("transactions");
         ArrayList<BitcoinTransactie> transacties = new ArrayList<>();

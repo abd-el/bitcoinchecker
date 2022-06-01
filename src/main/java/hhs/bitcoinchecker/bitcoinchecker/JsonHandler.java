@@ -6,7 +6,6 @@ import com.google.gson.reflect.TypeToken;
 
 import java.io.*;
 import java.lang.reflect.Type;
-import java.net.URL;
 import java.util.ArrayList;
 
 public class JsonHandler {
@@ -59,6 +58,6 @@ public class JsonHandler {
 
         Type type = new TypeToken<ArrayList<TrackedBitcoinAdres>>(){}.getType();
         assert reader != null;
-        return (ArrayList<TrackedBitcoinAdres>) gson.fromJson(reader, type);
+        return gson.fromJson(reader, type);
     }
 }

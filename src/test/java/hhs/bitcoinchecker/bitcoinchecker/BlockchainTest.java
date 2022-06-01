@@ -10,7 +10,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class BlockchainTest {
     @Test
-    public void Test() throws IOException, ParseException {
+    public void Test() {
         // Arrange
         Tracker.initialiseer();
         TrackedBitcoinAdres bitcoinAdres = new TrackedBitcoinAdres("Main","bc1qzxq78ncvglf6n2fugkq2ru8x4w53mw6h7zsakx",0);
@@ -28,7 +28,7 @@ public class BlockchainTest {
         System.out.println(opgehaaldeAdressen.get(1).getNaam());
 
         assertEquals(bitcoinAdres.getNaam(), opgehaaldeAdressen.get(1).getNaam());
-        assertEquals("bc1qzxq78ncvglf6n2fugkq2ru8x4w53mw6h7zsakx", opgehaaldeAdressen.get(0).getAdres());
+        assertEquals("bc1qzxq78ncvglf6n2fugkq2ru8x4w53mw6h7zsakx", opgehaaldeAdressen.get(0).getHash());
 
         /*
         for (BitcoinTransactie tx : geschiedenis) {
