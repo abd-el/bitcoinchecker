@@ -23,20 +23,7 @@ public class BlockchainTest {
 
         // Assert
 
-        System.out.println(opgehaaldeAdressen);
-        System.out.println(opgehaaldeAdressen.get(1));
-        System.out.println(opgehaaldeAdressen.get(1).getNaam());
-
-        assertEquals(bitcoinAdres.getNaam(), opgehaaldeAdressen.get(1).getNaam());
+        assertEquals(bitcoinAdres.getNaam(), opgehaaldeAdressen.get(0).getNaam());
         assertEquals("bc1qzxq78ncvglf6n2fugkq2ru8x4w53mw6h7zsakx", opgehaaldeAdressen.get(0).getHash());
-
-        /*
-        for (BitcoinTransactie tx : geschiedenis) {
-
-            System.out.println(tx.getHash());
-            System.out.println(tx.getBitcoinAdres());
-            System.out.println(tx.getTijd());
-        }
-        */
     }
 }
