@@ -16,11 +16,7 @@ public class Tracker {
     public static final TimerTask timerTask = new TimerTask() {
         @Override
         public void run() {
-            try {
-                controleerAlleAdressen();
-            } catch (IOException | ParseException e) {
-                e.printStackTrace();
-            }
+            controleerAlleAdressen();
         }
     };
 
@@ -31,37 +27,19 @@ public class Tracker {
         timer.scheduleAtFixedRate(timerTask, 0, 5 * 60 * 1000);
     }
 
-    private static void controleerAlleAdressen() throws IOException, ParseException {
+    private static void controleerAlleAdressen() {
         for (TrackedBitcoinAdres adres : adressen) {
-            controleerAdres(adres);
+            adres.controleer();
         }
     }
 
-    public static void controleerAdres(TrackedBitcoinAdres bitcoinAdres) throws IOException, ParseException {
-        Double prijs = Blockchain.getBitcoinPrijs();
-        ArrayList<BitcoinTransactie> geschiedenis = Blockchain.getAdresGeschiedenis(bitcoinAdres);
-        long tijd = System.currentTimeMillis();
-
-        for(int i = 0; i < geschiedenis.size(); i++){
-            BitcoinTransactie ts = geschiedenis.get(i);
-            if(bitcoinAdres.getLaatstGecontroleerd() < ts.getTijd()){
-                System.out.println(ts.getHash());
-                System.out.println(ts.getBitcoinAdres());
-                System.out.println(ts.getTijd());
-                stuurMelding(ts, prijs);
-            };
-        }
-        bitcoinAdres.setLaatstGecontroleerd(tijd);
-        JsonHandler.slaTrackedBitcoinAdressenOp();
-    }
-
-    private static void stuurMelding(BitcoinTransactie bitcoinTransactie, Double prijs){
+    public static void stuurMelding(BitcoinTransactie bitcoinTransactie, Double prijs){
         double totaal = bitcoinTransactie.getVerandering() * prijs;
         totaal = Math.round(totaal * 100.0) / 100.0;
         String caption;
         String text;
         String adresNaam = bitcoinTransactie.getBitcoinAdres().getNaam();
-        String adresHash = bitcoinTransactie.getBitcoinAdres().getAdres();
+        String adresHash = bitcoinTransactie.getBitcoinAdres().getHash();
 
         if( totaal > 0 ){
             caption = "Bitcoin gestort!";
@@ -78,7 +56,7 @@ public class Tracker {
         for (TrackedBitcoinAdres adres : adressen) {
             String naam = adres.getNaam();
             if (bitcoinAdres.getNaam().equals(naam)) {
-                bitcoinAdres.setAdres(adres.getAdres());
+                bitcoinAdres.setHash(adres.getHash());
                 bestaatAl = true;
             }
         }
@@ -93,7 +71,7 @@ public class Tracker {
     public static void verwijderAdres(TrackedBitcoinAdres bitcoinAdres) {
         for(int i = 0; i < adressen.size(); i++){
             TrackedBitcoinAdres adres = adressen.get(i);
-            if(bitcoinAdres.getAdres().equals(adres.getAdres())){
+            if(bitcoinAdres.getHash().equals(adres.getHash())){
                 adressen.remove(i);
                 break;
             }
@@ -102,7 +80,7 @@ public class Tracker {
         JsonHandler.slaTrackedBitcoinAdressenOp();
     }
 
-    public static ArrayList<TrackedBitcoinAdres> getAdressen() {
+    public static @NotNull ArrayList<TrackedBitcoinAdres> getAdressen() {
         return adressen;
     }
 

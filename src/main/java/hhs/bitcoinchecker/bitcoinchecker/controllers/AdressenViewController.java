@@ -9,11 +9,10 @@ import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.ResourceBundle;
 
 public class AdressenViewController implements Initializable {
-    @FXML
-    private Button button;
     @FXML
     private Button voegAdresToe;
     @FXML
@@ -38,7 +37,17 @@ public class AdressenViewController implements Initializable {
     @FXML
     protected void verwijderGeklikt(TrackedBitcoinAdres trackedBitcoinAdres){
         Tracker.verwijderAdres(trackedBitcoinAdres);
+        updateTabel();
     };
+
+    @FXML
+    protected void updateTabel(){
+        adresTabel.getItems().clear();
+        ArrayList<TrackedBitcoinAdres> adressen = Tracker.getAdressen();
+        for (TrackedBitcoinAdres trackedBitcoinAdres : adressen) {
+            voegAdresToe(trackedBitcoinAdres);
+        }
+    }
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -61,6 +70,6 @@ public class AdressenViewController implements Initializable {
             }
         });
 
-        voegAdresToe(new TrackedBitcoinAdres("test", "a1b2c3"));
+        updateTabel();
     }
 }
