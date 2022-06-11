@@ -40,7 +40,7 @@ public class VoegAdresToeViewController {
             return;
         }
 
-        TrackedBitcoinAdres bitcoinAdres = new TrackedBitcoinAdres(naam, hash, 0);
+        TrackedBitcoinAdres bitcoinAdres = new TrackedBitcoinAdres(naam, hash);
         Tracker.voegAdresToe(bitcoinAdres);
 
         BitcoinChecker.setScene("AdressenView.fxml");
