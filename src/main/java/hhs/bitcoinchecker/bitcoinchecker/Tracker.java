@@ -87,7 +87,7 @@ public class Tracker {
     public static void setAdressen(ArrayList<TrackedBitcoinAdres> nieuweAdressen){
         if(nieuweAdressen == null){
             // kan niet
-            return;
+            nieuweAdressen = new ArrayList<>();
         }
         adressen = nieuweAdressen;
     }

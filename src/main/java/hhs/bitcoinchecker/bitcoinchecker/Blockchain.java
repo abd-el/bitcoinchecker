@@ -20,97 +20,29 @@ import java.util.TimeZone;
 
 public class Blockchain {
     public static Double getBitcoinPrijs() {
-        URL myurl = null;
+        URL url = null;
         try {
-            myurl = new URL("https://api.coinbase.com/v2/prices/spot?currency=EUR");
+            url = new URL("https://api.coinbase.com/v2/prices/spot?currency=EUR");
         } catch (MalformedURLException e) {
             e.printStackTrace();
         }
 
-        HttpsURLConnection con = null;
-        try {
-            assert myurl != null;
-            con = (HttpsURLConnection) myurl.openConnection();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        try {
-            assert con != null;
-            con.setRequestMethod("GET");
-        } catch (ProtocolException e) {
-            e.printStackTrace();
-        }
-        con.setRequestProperty("Content-Type", "application/json");
-        con.setDoOutput(true);
-
-        BufferedReader br = null;
-        try {
-            br = new BufferedReader(new InputStreamReader(con.getInputStream()));
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        String fullResponse = "";
-        String i = null;
-        while (true){
-            try {
-                assert br != null;
-                if ((i = br.readLine()) == null) break;
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-            fullResponse = fullResponse + i;
-        }
-
-        JsonObject jsonObject = JsonHandler.gson.fromJson( fullResponse, JsonObject.class);
+        JsonObject jsonObject = JsonHandler.getHTTPS(url);
 
         return Double.parseDouble((jsonObject.getAsJsonObject("data")).get("amount").getAsString());
     }
 
     public static Double getAdresSaldo(BitcoinAdres adres) {
-        URL myurl = null;
+        URL url = null;
         try {
-            myurl = new URL("https://api.blockchair.com/bitcoin/dashboards/address/"+ adres.getHash() +"?transaction_details=true?limit=25");
+            url = new URL("https://api.blockchair.com/bitcoin/dashboards/address/"+ adres.getHash() +"?transaction_details=true?limit=25");
         } catch (MalformedURLException e) {
             e.printStackTrace();
         }
 
-        HttpsURLConnection con = null;
-        try {
-            assert myurl != null;
-            con = (HttpsURLConnection) myurl.openConnection();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        try {
-            assert con != null;
-            con.setRequestMethod("GET");
-        } catch (ProtocolException e) {
-            e.printStackTrace();
-        }
-        con.setRequestProperty("Content-Type", "application/json");
-        con.setDoOutput(true);
+        JsonObject jsonObject = JsonHandler.getHTTPS(url);
 
-        BufferedReader br = null;
-        try {
-            br = new BufferedReader(new InputStreamReader(con.getInputStream()));
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        String fullResponse = "";
-        String i = null;
-        while (true){
-            try {
-                assert br != null;
-                if ((i = br.readLine()) == null) break;
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-            fullResponse = fullResponse + i;
-        }
-
-        JsonObject jsonObject = JsonHandler.gson.fromJson(fullResponse, JsonObject.class);
         jsonObject = jsonObject.getAsJsonObject("data").getAsJsonObject(adres.getHash()).getAsJsonObject("address");
-
         return jsonObject.get("balance").getAsDouble() / 100000000;
     }
 }

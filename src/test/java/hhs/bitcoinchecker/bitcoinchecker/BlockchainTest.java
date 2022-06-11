@@ -13,7 +13,7 @@ public class BlockchainTest {
     public void Test() {
         // Arrange
         Tracker.initialiseer();
-        TrackedBitcoinAdres bitcoinAdres = new TrackedBitcoinAdres("Main","bc1qzxq78ncvglf6n2fugkq2ru8x4w53mw6h7zsakx",0);
+        TrackedBitcoinAdres bitcoinAdres = new TrackedBitcoinAdres("Main","bc1qzxq78ncvglf6n2fugkq2ru8x4w53mw6h7zsakx");
         Tracker.voegAdresToe(bitcoinAdres);
 
         // Act
@@ -22,7 +22,6 @@ public class BlockchainTest {
         // ArrayList<BitcoinTransactie> geschiedenis = bitcoinAdres.getGeschiedenisVanBlockchain();
 
         // Assert
-
         assertEquals(bitcoinAdres.getNaam(), opgehaaldeAdressen.get(0).getNaam());
         assertEquals("bc1qzxq78ncvglf6n2fugkq2ru8x4w53mw6h7zsakx", opgehaaldeAdressen.get(0).getHash());
     }
