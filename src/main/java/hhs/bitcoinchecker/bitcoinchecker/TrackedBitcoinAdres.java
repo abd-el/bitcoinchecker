@@ -5,19 +5,8 @@ import java.util.ArrayList;
 public class TrackedBitcoinAdres extends BitcoinAdres {
     private long laatstGecontroleerd;
 
-    public TrackedBitcoinAdres(String naam, String adres, Double saldo, ArrayList<BitcoinTransactie> geschiedenis, long laatstGecontroleerd) {
-        super(naam, adres, saldo, geschiedenis);
-        this.laatstGecontroleerd = laatstGecontroleerd;
-    }
-
-    public TrackedBitcoinAdres(String naam, String adres, Double saldo, long laatstGecontroleerd) {
-        super(naam, adres, saldo);
-        this.laatstGecontroleerd = laatstGecontroleerd;
-    }
-
-    public TrackedBitcoinAdres(String naam, String adres, long laatstGecontroleerd) {
-        super(naam, adres);
-        this.laatstGecontroleerd = laatstGecontroleerd;
+    public TrackedBitcoinAdres(String naam, String hash) {
+        super(naam, hash);
     }
 
     public long getLaatstGecontroleerd() {
@@ -26,6 +15,25 @@ public class TrackedBitcoinAdres extends BitcoinAdres {
 
     public void setLaatstGecontroleerd(long laatstGecontroleerd) {
         this.laatstGecontroleerd = laatstGecontroleerd;
+    }
+
+    public void controleer() {
+        Double prijs = Blockchain.getBitcoinPrijs();
+
+        ArrayList<BitcoinTransactie> geschiedenis = this.getGeschiedenisVanBlockchain();
+        long tijd = System.currentTimeMillis();
+
+        for (BitcoinTransactie ts : geschiedenis) {
+            if (this.getLaatstGecontroleerd() < ts.getTijd()) {
+                System.out.println(ts.getHash());
+                System.out.println(ts.getBitcoinAdres());
+                System.out.println(ts.getTijd());
+                Tracker.stuurMelding(ts, prijs);
+            }
+        }
+
+        this.setLaatstGecontroleerd(tijd);
+        JsonHandler.slaTrackedBitcoinAdressenOp();
     }
 
     @Override

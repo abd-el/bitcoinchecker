@@ -8,6 +8,8 @@ import javax.net.ssl.HttpsURLConnection;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.net.MalformedURLException;
+import java.net.ProtocolException;
 import java.net.URL;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -17,89 +19,30 @@ import java.util.Locale;
 import java.util.TimeZone;
 
 public class Blockchain {
-    private static Gson gson = new Gson();
-
-    public static Double getBitcoinPrijs() throws IOException {
-        URL myurl = new URL("https://api.coinbase.com/v2/prices/spot?currency=EUR");
-
-        HttpsURLConnection con = (HttpsURLConnection) myurl.openConnection();
-        con.setRequestMethod("GET");
-        con.setRequestProperty("Content-Type", "application/json");
-        con.setDoOutput(true);
-
-        BufferedReader br = new BufferedReader(new InputStreamReader(con.getInputStream()));
-        String fullResponse = "";
-        String i;
-        while ((i = br.readLine()) != null){
-            fullResponse = fullResponse + i;
+    public static Double getBitcoinPrijs() {
+        URL url = null;
+        try {
+            url = new URL("https://api.coinbase.com/v2/prices/spot?currency=EUR");
+        } catch (MalformedURLException e) {
+            e.printStackTrace();
         }
 
-        JsonObject jsonObject = gson.fromJson( fullResponse, JsonObject.class);
-        double amount = Double.parseDouble((jsonObject.getAsJsonObject("data")).get("amount").getAsString());
+        JsonObject jsonObject = JsonHandler.getHTTPS(url);
 
-        return amount;
+        return Double.parseDouble((jsonObject.getAsJsonObject("data")).get("amount").getAsString());
     }
 
-    public static Double getAdresSaldo(BitcoinAdres adres) throws IOException {
-        URL myurl = new URL("https://api.blockchair.com/bitcoin/dashboards/address/"+ adres.getAdres() +"?transaction_details=true?limit=25");
-
-        HttpsURLConnection con = (HttpsURLConnection) myurl.openConnection();
-        con.setRequestMethod("GET");
-        con.setRequestProperty("Content-Type", "application/json");
-        con.setDoOutput(true);
-
-        BufferedReader br = new BufferedReader(new InputStreamReader(con.getInputStream()));
-        String fullResponse = "";
-        String i;
-        while ((i = br.readLine()) != null){
-            fullResponse = fullResponse + i;
+    public static Double getAdresSaldo(BitcoinAdres adres) {
+        URL url = null;
+        try {
+            url = new URL("https://api.blockchair.com/bitcoin/dashboards/address/"+ adres.getHash() +"?transaction_details=true?limit=25");
+        } catch (MalformedURLException e) {
+            e.printStackTrace();
         }
 
-        JsonObject jsonObject = gson.fromJson(fullResponse, JsonObject.class);
-        jsonObject = jsonObject.getAsJsonObject("data").getAsJsonObject(adres.getAdres()).getAsJsonObject("address");
-        Double saldo = jsonObject.get("balance").getAsDouble() / 100000000;
+        JsonObject jsonObject = JsonHandler.getHTTPS(url);
 
-        return saldo;
-    }
-
-    public static ArrayList<BitcoinTransactie> getAdresGeschiedenis(BitcoinAdres adres) throws IOException, ParseException {
-        URL myurl = new URL("https://api.blockchair.com/bitcoin/dashboards/address/"+ adres.getAdres() +"?transaction_details=true?limit=25");
-
-        HttpsURLConnection con = (HttpsURLConnection) myurl.openConnection();
-        con.setRequestMethod("GET");
-        con.setRequestProperty("Content-Type", "application/json");
-        con.setDoOutput(true);
-
-        BufferedReader br = new BufferedReader(new InputStreamReader(con.getInputStream()));
-        String fullResponse = "";
-        String txt;
-        while ((txt = br.readLine()) != null){
-            fullResponse = fullResponse + txt;
-        }
-
-        JsonObject jsonObject = gson.fromJson(fullResponse, JsonObject.class)
-                .getAsJsonObject("data")
-                .getAsJsonObject(adres.getAdres());
-
-        JsonArray jsonArray = jsonObject.getAsJsonArray("transactions");
-        ArrayList<BitcoinTransactie> transacties = new ArrayList<>();
-
-        for(int i = 0; i < jsonArray.size(); i++){
-            JsonObject jObj = jsonArray.get(i).getAsJsonObject();
-
-            String hash = jObj.get("hash").getAsString();
-            Double change = jObj.get("balance_change").getAsDouble() / 100000000;
-
-            SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.US);
-            format.setTimeZone(TimeZone.getTimeZone("UTC"));
-
-            Date date = format.parse(jObj.get("time").getAsString());
-            long tijd = date.getTime();
-
-            BitcoinTransactie transactie = new BitcoinTransactie(adres, hash, tijd, change);
-            transacties.add(transactie);
-        }
-
-        return transacties;
+        jsonObject = jsonObject.getAsJsonObject("data").getAsJsonObject(adres.getHash()).getAsJsonObject("address");
+        return jsonObject.get("balance").getAsDouble() / 100000000;
     }
 }

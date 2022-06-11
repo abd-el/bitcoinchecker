@@ -10,33 +10,19 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class BlockchainTest {
     @Test
-    public void Test() throws IOException, ParseException {
+    public void Test() {
         // Arrange
         Tracker.initialiseer();
-        TrackedBitcoinAdres bitcoinAdres = new TrackedBitcoinAdres("Main","bc1qzxq78ncvglf6n2fugkq2ru8x4w53mw6h7zsakx",0);
+        TrackedBitcoinAdres bitcoinAdres = new TrackedBitcoinAdres("Main","bc1qzxq78ncvglf6n2fugkq2ru8x4w53mw6h7zsakx");
         Tracker.voegAdresToe(bitcoinAdres);
 
         // Act
 
         ArrayList<TrackedBitcoinAdres> opgehaaldeAdressen = JsonHandler.haalTrackedBitcoinAdressenOp();
-        // ArrayList<BitcoinTransactie> geschiedenis = Blockchain.getAdresGeschiedenis(bitcoinAdres);
+        // ArrayList<BitcoinTransactie> geschiedenis = bitcoinAdres.getGeschiedenisVanBlockchain();
 
         // Assert
-
-        System.out.println(opgehaaldeAdressen);
-        System.out.println(opgehaaldeAdressen.get(1));
-        System.out.println(opgehaaldeAdressen.get(1).getNaam());
-
-        assertEquals(bitcoinAdres.getNaam(), opgehaaldeAdressen.get(1).getNaam());
-        assertEquals("bc1qzxq78ncvglf6n2fugkq2ru8x4w53mw6h7zsakx", opgehaaldeAdressen.get(0).getAdres());
-
-        /*
-        for (BitcoinTransactie tx : geschiedenis) {
-
-            System.out.println(tx.getHash());
-            System.out.println(tx.getBitcoinAdres());
-            System.out.println(tx.getTijd());
-        }
-        */
+        assertEquals(bitcoinAdres.getNaam(), opgehaaldeAdressen.get(0).getNaam());
+        assertEquals("bc1qzxq78ncvglf6n2fugkq2ru8x4w53mw6h7zsakx", opgehaaldeAdressen.get(0).getHash());
     }
 }
