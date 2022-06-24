@@ -1,12 +1,10 @@
 package hhs.bitcoinchecker.bitcoinchecker;
 
-import java.util.ArrayList;
-
-public class TrackedBitcoinAdres extends BitcoinAdres {
+public class UntrackedBitcoinAdres extends BitcoinAdres {
     private long laatstGecontroleerd = 0;
 
-    public TrackedBitcoinAdres(String naam, String hash) {
-        super(naam, hash, true);
+    public UntrackedBitcoinAdres(String naam, String hash) {
+        super(naam, hash, false);
     }
 
     @Override
@@ -17,11 +15,11 @@ public class TrackedBitcoinAdres extends BitcoinAdres {
 
     @Override
     public void setLaatstGecontroleerd(long laatstGecontroleerd) {
-        this.laatstGecontroleerd = laatstGecontroleerd;
+
     }
 
     @Override
     public long getLaatstGecontroleerd() {
-        return laatstGecontroleerd;
+        return 0;
     }
 }
