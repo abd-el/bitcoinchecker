@@ -17,15 +17,19 @@ public abstract class BitcoinAdres {
     private String hash;
     private Double saldo;
     private ArrayList<BitcoinTransactie> geschiedenis;
+    private boolean tracked;
 
-    public BitcoinAdres(String naam, String hash) {
+    public BitcoinAdres(String naam, String hash, boolean tracked) {
         this.naam = naam;
         this.hash = hash;
+        this.tracked = tracked;
     }
 
     public void setHash(String hash) {
         this.hash = hash;
     }
+
+    public boolean getTracked() { return tracked; }
 
     public String getNaam() {
         return naam;
@@ -37,6 +41,36 @@ public abstract class BitcoinAdres {
 
     public Double getSaldo() {
         return saldo;
+    }
+
+    protected long laatstGecontroleerd;
+
+    public long getLaatstGecontroleerd() {
+        return 0;
+    }
+
+    public void setLaatstGecontroleerd(long laatstGecontroleerd) {
+
+    }
+
+    public void controleer() {
+        if(this.getTracked()){
+            Double prijs = Blockchain.getBitcoinPrijs();
+
+            ArrayList<BitcoinTransactie> geschiedenis = this.getGeschiedenisVanBlockchain();
+            long tijd = System.currentTimeMillis();
+
+            for (BitcoinTransactie ts : geschiedenis) {
+                if (this.getLaatstGecontroleerd() < ts.getTijd()) {
+                    Tracker.stuurMelding(ts, prijs);
+                }
+            }
+
+            this.setLaatstGecontroleerd(tijd);
+            JsonHandler.slaTrackedBitcoinAdressenOp();
+        } else {
+            this.setLaatstGecontroleerd(0);
+        }
     }
 
     public ArrayList<BitcoinTransactie> getGeschiedenisVanBlockchain() {
@@ -52,6 +86,7 @@ public abstract class BitcoinAdres {
                 .getAsJsonObject(this.getHash());
 
         JsonArray jsonArray = jsonObject.getAsJsonArray("transactions");
+
         ArrayList<BitcoinTransactie> transacties = new ArrayList<>();
 
         for(int i = 0; i < jsonArray.size(); i++){
